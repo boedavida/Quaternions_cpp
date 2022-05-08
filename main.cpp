@@ -1,8 +1,9 @@
-// run_quaternions.cpp
+// main.cpp
 // (c) David Boe
 
 #include <stdio.h>
 #include <vector>
+#include <stdexcept>
 #include "quaternion.h"
 #include "linalg.h"
 
@@ -11,13 +12,25 @@ using namespace std;
 int main() {
     // Multiplication. x * y = 8 + -9i + -2j + 11k
     Quaternion x{ 3.0, 1.0, -2.0, 1.0 };
-    Quaternion y{ 2.0, -1.0, 2.0, 3.0 };
+    //Quaternion y{ 2.0, -1.0, 2.0, 3.0 };
+    Quaternion y{ 0.0, 0.0, 0.0, 0.0 };
     Quaternion z = x * y;
     
     printf("\nQuaternion multiplication:");
     printf("\nx = %s", x.repr_string().c_str());
     printf("\ny = %s", y.repr_string().c_str());
     printf("\nx * y = %s\n", z.repr_string().c_str());
+
+    printf("\nDivision is accomplished by multiplication with the inverse:");
+    try {
+        // The inverse of a quaternion is not defined if its norm equals 0
+        Quaternion yinv = y.inv();
+    }
+    catch (runtime_error& e) {
+        printf("\nException occurred - %s\n", e.what());
+    }
+    Quaternion d = x * y.inv();
+    printf("\nx * y^-1 = %s\n", d.repr_string().c_str());
 
     // Vector rotation
     const double t = 2 * PI / 3;

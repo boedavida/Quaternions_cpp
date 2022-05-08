@@ -42,11 +42,10 @@ public:
     Quaternion inv() const;
     vector<double> coef() const;
 
-    // Overload +, -, *, and / operators
+    // Overload +, -, and * operators
     const Quaternion operator + (const Quaternion&) const;
     const Quaternion operator - (const Quaternion&) const;
     const Quaternion operator * (const Quaternion&) const;
-    const Quaternion operator / (const Quaternion&) const;
 
     // Overload isequal operator
     bool operator == (const Quaternion&) const;

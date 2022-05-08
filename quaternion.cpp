@@ -5,6 +5,7 @@
 #include <math.h>
 #include <vector>
 #include <string> 
+#include <stdexcept>
 #include "linalg.h"
 
 using namespace std;
@@ -57,6 +58,10 @@ Quaternion Quaternion::conjugate() const {
 
 Quaternion Quaternion::inv() const {
     double n = this->norm();
+    // The inverse of a quaternion is not defined if its norm equals 0 
+    if (n * n == 0) {
+        throw runtime_error("Math error: Attempted to divide by Zero\n");
+    }
     double d = 1 / (n * n);
     vector<double> v = { q0, -q1, -q2, -q3 };
     vector<double> w = scalarVectorProduct(d, v);
@@ -69,7 +74,6 @@ vector<double> Quaternion::coef() const {
 
 // OVerload arithmetic operators
 const Quaternion Quaternion::operator + (const Quaternion& rhs) const {
-    //static Quaternion q1 = Quaternion(q0 + rhs.q0, q1 + rhs.q1, q2 + rhs.q2, q3 + rhs.q3);
     return Quaternion(q0 + rhs.q0, q1 + rhs.q1, q2 + rhs.q2, q3 + rhs.q3);
 }
 const Quaternion Quaternion::operator - (const Quaternion& rhs) const {
@@ -89,22 +93,15 @@ const Quaternion Quaternion::operator * (const Quaternion& rhs) const {
     vector<double> p = this->imaginary();
     vector<double> q = rhs.imaginary();
     
-    //vector<double> p0q = scalarVectorProduct(this->a(), q);
-    //vector<double> q0p = scalarVectorProduct(rhs.a(), p);
     vector<double> p0q = scalarVectorProduct(q0, q);
     vector<double> q0p = scalarVectorProduct(rhs.q0, p);
     vector<double> cpr = crossProduct(p, q);
-    double ap = q0 * rhs.a() - dotProduct(p, q);
+    double ap = q0 * rhs.q0 - dotProduct(p, q);
     double bp = p0q[0] + q0p[0] + cpr[0];
     double cp = p0q[1] + q0p[1] + cpr[1];
     double dp = p0q[2] + q0p[2] + cpr[2];
    
     return Quaternion(ap, bp, cp, dp);
-}
-const Quaternion Quaternion::operator / (const Quaternion& rhs) const {
-    // Check for and disallow division by zero 
-    //const static Quaternion q4 = *this * rhs.inv();
-    return *this * rhs.inv();
 }
 
 bool Quaternion::operator == (const Quaternion& rhs) const {
