@@ -60,7 +60,7 @@ Quaternion Quaternion::inv() const {
     double n = this->norm();
     // The inverse of a quaternion is not defined if its norm equals 0 
     if (n * n == 0) {
-        throw runtime_error("Math error: Attempted to divide by Zero\n");
+        throw runtime_error("Division by zero is undefined\n");
     }
     double d = 1 / (n * n);
     vector<double> v = { q0, -q1, -q2, -q3 };
