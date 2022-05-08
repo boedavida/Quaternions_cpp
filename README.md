@@ -7,4 +7,4 @@ In the abstract algebra subfield of mathematics, the set of quaternions together
 
 An important application of quaternions is rotations of vectors or coordinate frames in three dimensions much like that of Euler angles and rotation matrices. In contrast to rotation matrices, rotations using quaternions do not have a singularity. Herein a class is implemented in C++ for using quaternions for rotations of vectors and coordinate frames.
 
-In the class, the quaternion is an object, and the following operations are currently implemented for quaternions: addition, subtraction, multiplication, division, complex conjugation, norm, inverse, the use of quaternions for rotation of a vector with respect to its coordinate frame, and the use of quaternions for rotation of a coordinate frame itself.
+In the class, the quaternion is an object, and the following operations are currently implemented for quaternions: addition, subtraction, multiplication, complex conjugation, norm, inverse, the use of quaternions for rotation of a vector with respect to its coordinate frame, and the use of quaternions for rotation of a coordinate frame itself.
