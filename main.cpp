@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <vector>
+#include <math.h>
 #include <stdexcept>
 #include "quaternion.h"
 #include "linalg.h"
@@ -12,8 +13,7 @@ using namespace std;
 int main() {
     // Multiplication. x * y = 8 + -9i + -2j + 11k
     Quaternion x{ 3.0, 1.0, -2.0, 1.0 };
-    //Quaternion y{ 2.0, -1.0, 2.0, 3.0 };
-    Quaternion y{ 0.0, 0.0, 0.0, 0.0 };
+    Quaternion y{ 2.0, -1.0, 2.0, 3.0 };
     Quaternion z = x * y;
     
     printf("\nQuaternion multiplication:");
