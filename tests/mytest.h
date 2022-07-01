@@ -1,8 +1,8 @@
 // mytest.h
 
 
-#ifndef __mytest__
-#define __mytest__
+#ifndef mytest_H
+#define mytest_H
 
 #include <cstdio>
 
@@ -33,4 +33,4 @@ public:
     void report() const;
 };
 
-#endif /* defined(__mytest__) */
+#endif /* defined(mytest_H) */
