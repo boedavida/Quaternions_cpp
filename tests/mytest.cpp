@@ -20,10 +20,11 @@ void mytest::test ( const char * description, const int flag ) {
         pf = __rslt_fail;
         ++_failCount;
     }
-    if(!_summaryFlag) printf("%s: %s -> %s\n", _testDescrp, description, pf);
+    if (!_summaryFlag) printf("Test: '%s' Result: % s\n", description, pf);
+    //if(!_summaryFlag) printf("%s: Test- %s. Result- %s\n", _testDescrp, description, pf);
 }
 
 void mytest::report() const {
-    printf("%s: pass: %ld, fail: %ld\n", _testDescrp, passCount(), failCount());
+    printf("%s: passed: %ld, failed: %ld\n", _testDescrp, passCount(), failCount());
     fflush(stdout);
 }
