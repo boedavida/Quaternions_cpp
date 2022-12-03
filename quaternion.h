@@ -33,7 +33,7 @@ public:
     double d() const;
 
     // String printable representation
-    string repr_string() const;
+    const string & repr_string() const;
 
     double real() const;
     vector<double> imaginary() const;
