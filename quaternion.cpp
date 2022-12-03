@@ -29,8 +29,8 @@ double Quaternion::b() const { return q1; };
 double Quaternion::c() const { return q2; };
 double Quaternion::d() const { return q3; };
 
-string Quaternion::repr_string() const {
-    string str = to_string(q0);
+const string & Quaternion::repr_string() const {
+    static string str = to_string(q0);
     for (double x : vector<double>{ q1, q2, q3 }) {
         if (signbit(x)) {
             str += " - " + to_string(abs(x));
