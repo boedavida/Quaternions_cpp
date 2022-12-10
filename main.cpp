@@ -1,5 +1,5 @@
 // main.cpp
-// (c) David Boe
+// (c) David Boe 2022
 
 #include <stdio.h>
 #include <vector>
@@ -21,6 +21,16 @@ int main() {
     printf("\ny = %s", y.repr_string().c_str());
     printf("\nx * y = %s\n", z.repr_string().c_str());
 
+    // Test equality
+    Quaternion xcopy = x;
+    printf("\nxcopy = %s", xcopy.repr_string().c_str());
+    if (xcopy == x) {
+        printf("\nEquality test: Passed\n");
+    }
+    else { 
+        printf("\Equality test: Failed\n");
+    }
+
     printf("\nDivision is accomplished by multiplication with the inverse:");
     try {
         // The inverse of a quaternion is not defined if its norm equals 0
@@ -39,6 +49,7 @@ int main() {
     Quaternion q{ t, ax };
     vector<double> v_rotated = q.rotateVector(v);
     printf("\nRotation of a vector in a coordinate frame using a quaternion:");
+    printf("\nq = %s", q.repr_string().c_str());
     printf("\nVector coordinates before rotation are (%f, %f, %f)", v[0], v[1], v[2]);
     printf("\nVector coordinates after rotation of 2*pi/3 about (1, 1, 1) are (%f, %f, %f)\n", v_rotated[0], v_rotated[1], v_rotated[2]);
 

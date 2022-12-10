@@ -11,8 +11,18 @@
 using namespace std;
 
 // Constructors
-Quaternion::Quaternion(const double a, const double b, const double c, const double d) : q0(a), q1(b), q2(c), q3(d) {};
-Quaternion::Quaternion(const Quaternion & q) : q0(q.q0), q1(q.q1), q2(q.q2), q3(q.q3) {}; // Copy constructor
+Quaternion::Quaternion(const double a, const double b, const double c, const double d) : q0(a), q1(b), q2(c), q3(d) {
+    qrepr = to_string(q0);
+    for (double x : vector<double>{ q1, q2, q3 }) {
+        if (signbit(x)) {
+            qrepr += " - " + to_string(abs(x));
+        }
+        else {
+            qrepr += " + " + to_string(x);
+        }
+    };
+};
+Quaternion::Quaternion(const Quaternion & q) : q0(q.q0), q1(q.q1), q2(q.q2), q3(q.q3), qrepr(q.qrepr) {}; // Copy constructor
 Quaternion::Quaternion(const double t, const vector<double>& ax) {
     // Constructor with angle and axis of rotation
     double ax_norm_inv = 1 / sqrt(dotProduct(ax, ax));
@@ -21,6 +31,16 @@ Quaternion::Quaternion(const double t, const vector<double>& ax) {
     q1 = ax_unit[0] * sin(t / 2);
     q2 = ax_unit[1] * sin(t / 2);
     q3 = ax_unit[2] * sin(t / 2);
+
+    qrepr = to_string(q0);
+    for (double x : vector<double>{ q1, q2, q3 }) {
+        if (signbit(x)) {
+            qrepr += " - " + to_string(abs(x));
+        }
+        else {
+            qrepr += " + " + to_string(x);
+        }
+    };
 }
 
 // Getters
@@ -29,17 +49,8 @@ double Quaternion::b() const { return q1; };
 double Quaternion::c() const { return q2; };
 double Quaternion::d() const { return q3; };
 
-string Quaternion::repr_string() const {
-    string str = to_string(q0);
-    for (double x : vector<double>{ q1, q2, q3 }) {
-        if (signbit(x)) {
-            str += " - " + to_string(abs(x));
-        }
-        else {
-            str += " + " + to_string(x);
-        }
-    };
-    return str; 
+const string & Quaternion::repr_string() const {
+    return qrepr;
 }
 
 double Quaternion::real() const { return q0; };
